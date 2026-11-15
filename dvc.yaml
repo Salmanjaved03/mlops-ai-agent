@@ -1,0 +1,21 @@
+stages:
+  prepare:
+    cmd: python training/prepare_data.py
+    deps:
+      - training/prepare_data.py
+      - data/raw
+    outs:
+      - data/processed
+  train:
+    cmd: python training/train.py
+    deps:
+      - training/train.py
+      - data/processed
+    outs:
+      - models/model.pkl
+    metrics:
+      - metrics.json:
+          cache: false
+    plots:
+      - plots/metrics.csv:
+          cache: false
