@@ -31,7 +31,7 @@ APPROVED_DAGS: list[str] = [
     "training_evaluation",
 ]
 
-_REQUEST_TIMEOUT: int = 30
+_REQUEST_TIMEOUT: int = int(os.getenv("AIRFLOW_TIMEOUT", "3"))
 
 
 # ---------------------------------------------------------------------------

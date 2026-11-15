@@ -48,20 +48,21 @@ def _pretty_print(response) -> None:  # noqa: ANN001
     print(f"\n{response.response_text}\n")
 
     if response.warnings:
-        print("⚠  Warnings:")
+        print("[!] Warnings:")
         for warning in response.warnings:
-            print(f"   • {warning}")
+            print(f"   * {warning}")
         print()
 
     if response.tool_results:
-        print(f"{'─' * 40}")
+        dash_line = "-" * 40
+        print(dash_line)
         print(f"  Tool Results ({len(response.tool_results)} total):")
         for tr in response.tool_results:
-            status = "✓" if tr.success else "✗"
+            status = "[OK]" if tr.success else "[FAIL]"
             print(f"    {status} {tr.tool_name} ({tr.duration_seconds}s)")
             if tr.error:
                 print(f"      Error: {tr.error}")
-        print(f"{'─' * 40}\n")
+        print(f"{dash_line}\n")
 
 
 # ---------------------------------------------------------------------------
@@ -71,7 +72,7 @@ def _pretty_print(response) -> None:  # noqa: ANN001
 
 async def _interactive_mode(agent: MLOpsAgent) -> None:
     """Run an interactive REPL loop."""
-    print("\n🤖  MLOps AI Agent – Interactive Mode")
+    print("\n=== MLOps AI Agent - Interactive Mode ===")
     print("   Type your query and press Enter. Type 'exit' or 'quit' to leave.\n")
 
     while True:

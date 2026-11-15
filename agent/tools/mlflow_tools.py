@@ -19,6 +19,9 @@ except ImportError:
     MlflowException = Exception  # type: ignore
     MlflowClient = None  # type: ignore
 
+os.environ.setdefault("MLFLOW_HTTP_REQUEST_MAX_RETRIES", "1")
+os.environ.setdefault("MLFLOW_HTTP_REQUEST_TIMEOUT", "3")
+
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
